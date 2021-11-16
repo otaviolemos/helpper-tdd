@@ -1,3 +1,3 @@
 # Furniture ecommerce
 
-Based on cosmic python example.
+Based on cosmicpython example. Porting it to TypeScript/Node.js.

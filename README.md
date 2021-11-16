@@ -1,3 +1,3 @@
-# typescript-base
+# Furniture ecommerce
 
-Base typescript project with all necessary dependencies.
+Based on cosmic python example.

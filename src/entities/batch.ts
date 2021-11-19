@@ -5,7 +5,7 @@ export class Batch {
     public reference: string,
     public sku: string,
     public quantity: number,
-    public eta: Date,
+    public eta?: Date,
     public availableQuantity: number = quantity
   ) {}
 

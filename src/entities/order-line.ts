@@ -1,5 +1,5 @@
 export class OrderLine {
-  constructor (public orderId: string,
-    public sku: string,
-    public quantity: number) {}
+  constructor (readonly orderId: string,
+    readonly sku: string,
+    readonly quantity: number) {}
 }

@@ -29,6 +29,11 @@ describe('Batch', () => {
     const lineWithDifferentSku = new OrderLine('order-123', 'EXPENSIVE-TOASTER', 10)
     expect(batch.canAllocate(lineWithDifferentSku)).toBeFalsy()
   })
+
+  it('should not be able to create batch without an ETA', () => {
+    const batch = new Batch('batch-001', 'UNCOMFORTABLE-CHAIR', 100)
+    expect(batch.eta).toBeUndefined()
+  })
 })
 
 interface BatchAndLine { batch: Batch, line: OrderLine }

@@ -12,4 +12,9 @@ export class Batch {
   allocate (line: OrderLine): void {
     this.availableQuantity -= line.quantity
   }
+
+  canAllocate (line: OrderLine): boolean {
+    return this.availableQuantity >= line.quantity &&
+      this.sku === line.sku
+  }
 }

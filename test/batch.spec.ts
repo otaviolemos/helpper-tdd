@@ -30,7 +30,7 @@ describe('Batch', () => {
     expect(batch.canAllocate(lineWithDifferentSku)).toBeFalsy()
   })
 
-  it('should not be able to create batch without an ETA', () => {
+  it('should be able to create batch without an ETA', () => {
     const batch = new Batch('batch-001', 'UNCOMFORTABLE-CHAIR', 100)
     expect(batch.eta).toBeUndefined()
   })

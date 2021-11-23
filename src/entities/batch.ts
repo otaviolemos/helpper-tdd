@@ -28,13 +28,26 @@ export class Batch {
 
   canAllocate (line: OrderLine): boolean {
     return this.availableQuantity >= line.quantity &&
-      this.sku === line.sku
+      this.sku === line.sku &&
+      !this.alreadyAllocated(line)
   }
 
   deallocate (line: OrderLine): void {
-    if (this.allocations.includes(line)) {
-      const index = this.allocations.indexOf(line)
+    if (this.alreadyAllocated(line)) {
+      const index = this.allocations.indexOf(
+        this.sameAs(line)
+      )
       this.allocations.splice(index)
     }
+  }
+
+  private alreadyAllocated (line: OrderLine): boolean {
+    return (this.allocations
+      .filter(allocatedLine => allocatedLine.equals(line))).length > 0
+  }
+
+  private sameAs (line: OrderLine): OrderLine {
+    return (this.allocations
+      .filter(allocatedLine => allocatedLine.equals(line)))[0]
   }
 }

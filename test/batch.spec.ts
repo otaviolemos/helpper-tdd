@@ -41,11 +41,21 @@ describe('Batch', () => {
     expect(batch.eta).toBeUndefined()
   })
 
-  it('should be able to deallocate allocated lines', () => {
+  it('should be able to deallocate allocated line', () => {
     const { batch, line } = makeBatchAndLine('DECORATIVE-TRINKET', 20, 2)
+    const lineClone = new OrderLine('order-123', 'DECORATIVE-TRINKET', 2)
     batch.allocate(line)
-    batch.deallocate(line)
+    batch.deallocate(lineClone)
     expect(batch.availableQuantity).toEqual(20)
+  })
+
+  it('should not be able to allocate same line twice', () => {
+    const batch = new Batch('batch-001', 'EXPENSIVE-TOASTER', 100)
+    const line = new OrderLine('order-123', 'EXPENSIVE-TOASTER', 10)
+    const lineClone = new OrderLine('order-123', 'EXPENSIVE-TOASTER', 10)
+    batch.allocate(line)
+    batch.allocate(lineClone)
+    expect(batch.availableQuantity).toEqual(90)
   })
 
   // usar para sets of order lines:

@@ -30,10 +30,26 @@ describe('Batch', () => {
     expect(batch.canAllocate(lineWithDifferentSku)).toBeFalsy()
   })
 
+  it('should not be able to allocate if conditions not met', () => {
+    const { batch, line } = makeBatchAndLine('ELEGANT_LAMP', 2, 20)
+    batch.allocate(line)
+    expect(batch.availableQuantity).toEqual(2)
+  })
+
   it('should be able to create batch without an ETA', () => {
     const batch = new Batch('batch-001', 'UNCOMFORTABLE-CHAIR', 100)
     expect(batch.eta).toBeUndefined()
   })
+
+  it('should be able to deallocate allocated lines', () => {
+    const { batch, line } = makeBatchAndLine('DECORATIVE-TRINKET', 20, 2)
+    batch.allocate(line)
+    batch.deallocate(line)
+    expect(batch.availableQuantity).toEqual(20)
+  })
+
+  // usar para sets of order lines:
+  // https://stackoverflow.com/questions/39950597/typescript-set-of-objects
 })
 
 interface BatchAndLine { batch: Batch, line: OrderLine }

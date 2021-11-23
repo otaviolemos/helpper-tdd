@@ -57,9 +57,6 @@ describe('Batch', () => {
     batch.allocate(lineClone)
     expect(batch.availableQuantity).toEqual(90)
   })
-
-  // usar para sets of order lines:
-  // https://stackoverflow.com/questions/39950597/typescript-set-of-objects
 })
 
 interface BatchAndLine { batch: Batch, line: OrderLine }

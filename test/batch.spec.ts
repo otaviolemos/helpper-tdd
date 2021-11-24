@@ -10,17 +10,17 @@ describe('Batch', () => {
   })
 
   it('should be able to allocate if available greater than required', () => {
-    const { batch, line } = makeBatchAndLine('ELEGANT_LAMP', 20, 2)
+    const { batch, line } = makeBatchAndLineWithSameSku('ELEGANT_LAMP', 20, 2)
     expect(batch.canAllocate(line)).toBeTruthy()
   })
 
   it('should not be able to allocate if available smaller than required', () => {
-    const { batch, line } = makeBatchAndLine('ELEGANT_LAMP', 2, 20)
+    const { batch, line } = makeBatchAndLineWithSameSku('ELEGANT_LAMP', 2, 20)
     expect(batch.canAllocate(line)).toBeFalsy()
   })
 
   it('should be able to allocate if available equal to required', () => {
-    const { batch, line } = makeBatchAndLine('ELEGANT_LAMP', 2, 2)
+    const { batch, line } = makeBatchAndLineWithSameSku('ELEGANT_LAMP', 2, 2)
     expect(batch.canAllocate(line)).toBeTruthy()
   })
 
@@ -31,7 +31,7 @@ describe('Batch', () => {
   })
 
   it('should not be able to allocate if conditions not met', () => {
-    const { batch, line } = makeBatchAndLine('ELEGANT_LAMP', 2, 20)
+    const { batch, line } = makeBatchAndLineWithSameSku('ELEGANT_LAMP', 2, 20)
     batch.allocate(line)
     expect(batch.availableQuantity).toEqual(2)
   })
@@ -42,7 +42,7 @@ describe('Batch', () => {
   })
 
   it('should be able to deallocate allocated line', () => {
-    const { batch, line } = makeBatchAndLine('DECORATIVE-TRINKET', 20, 2)
+    const { batch, line } = makeBatchAndLineWithSameSku('DECORATIVE-TRINKET', 20, 2)
     const lineClone = new OrderLine('order-123', 'DECORATIVE-TRINKET', 2)
     batch.allocate(line)
     batch.deallocate(lineClone)
@@ -61,7 +61,7 @@ describe('Batch', () => {
 
 interface BatchAndLine { batch: Batch, line: OrderLine }
 
-function makeBatchAndLine (sku: string, batchQuantity: number, lineQuantity: number): BatchAndLine {
+function makeBatchAndLineWithSameSku (sku: string, batchQuantity: number, lineQuantity: number): BatchAndLine {
   return {
     batch: new Batch('batch-001', sku, batchQuantity, new Date()),
     line: new OrderLine('order-123', sku, lineQuantity)

@@ -32,22 +32,19 @@ export class Batch {
       !this.alreadyAllocated(line)
   }
 
+  private alreadyAllocated (line: OrderLine): boolean {
+    return this.findAllocated(line) !== undefined
+  }
+
   deallocate (line: OrderLine): void {
-    if (this.alreadyAllocated(line)) {
-      const index = this.allocations.indexOf(
-        this.sameAs(line)
-      )
+    const found = this.findAllocated(line)
+    if (found !== undefined) {
+      const index = this.allocations.indexOf(found)
       this.allocations.splice(index)
     }
   }
 
-  private alreadyAllocated (line: OrderLine): boolean {
-    return (this.allocations
-      .filter(allocatedLine => allocatedLine.equals(line))).length > 0
-  }
-
-  private sameAs (line: OrderLine): OrderLine {
-    return (this.allocations
-      .filter(allocatedLine => allocatedLine.equals(line)))[0]
+  private findAllocated (line: OrderLine): OrderLine {
+    return this.allocations.find(allocatedLine => allocatedLine.equals(line))
   }
 }

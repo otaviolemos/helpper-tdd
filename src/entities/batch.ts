@@ -1,7 +1,7 @@
 import { OrderLine } from './order-line'
 
 export class Batch {
-  public allocations = new Array<OrderLine>()
+  private readonly allocations = new Array<OrderLine>()
 
   constructor (
     public reference: string,

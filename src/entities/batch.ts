@@ -45,6 +45,7 @@ export class Batch {
   }
 
   private findAllocated (line: OrderLine): OrderLine {
-    return this.allocations.find(allocatedLine => allocatedLine.equals(line))
+    return this.allocations.find(allocatedLine =>
+      allocatedLine.equals(line))
   }
 }

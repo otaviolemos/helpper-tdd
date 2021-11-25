@@ -36,16 +36,16 @@ export class Batch {
     return this.findAllocated(line) !== undefined
   }
 
+  private findAllocated (line: OrderLine): OrderLine {
+    return this.allocations.find(allocatedLine =>
+      allocatedLine.equals(line))
+  }
+
   deallocate (line: OrderLine): void {
     const found = this.findAllocated(line)
     if (found !== undefined) {
       const index = this.allocations.indexOf(found)
       this.allocations.splice(index)
     }
-  }
-
-  private findAllocated (line: OrderLine): OrderLine {
-    return this.allocations.find(allocatedLine =>
-      allocatedLine.equals(line))
   }
 }

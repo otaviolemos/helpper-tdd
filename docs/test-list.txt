@@ -1,4 +1,4 @@
-1 - should prefer stock batches
+1 - should prefer stock batches to shipments
 2 - should prefer earlier batches
 3 - should return allocated batch reference
 4 - should handle empty batch arrays
